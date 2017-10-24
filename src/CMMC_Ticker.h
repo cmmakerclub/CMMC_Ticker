@@ -15,15 +15,22 @@ class CMMC_Ticker
         this->_every_ms = every_ms;
         this->_ticker = new Ticker;
         this->_ticker_cb = []() {
-          // that->_state = !that->_state;
-          // *that->_user_state_ptr = that->_state;
-          *that->_user_state_ptr = 1;
+          that->_dirty_flag = 1; 
+          *that->_user_state_ptr = that->_dirty_flag;
         };
       }
       ~CMMC_Ticker() {} 
-      void start(uint32_t every_ms = 0); 
+      uint8_t is_dirty() {
+        return _dirty_flag;
+      }
+      void clear_dirty() {
+        _dirty_flag = 0;
+        *_user_state_ptr = _dirty_flag;
+      }
+      void start(); 
     private:
       uint8_t *_user_state_ptr = NULL;
+      uint8_t _dirty_flag = 0; 
       uint32_t _every_ms;
       Ticker *_ticker = NULL;
       cmmc_ticker_cb_t _ticker_cb;

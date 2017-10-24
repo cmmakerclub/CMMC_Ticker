@@ -13,9 +13,4 @@ void setup()
 
 void loop()
 { 
-    Serial.println(state); 
-    if (state == 1) {
-        state = 0;
-    }
-    delay(100);
 }
