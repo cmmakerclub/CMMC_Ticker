@@ -13,4 +13,8 @@ void setup()
 
 void loop()
 { 
+    if (ticker.is_dirty()) {
+        Serial.println(millis());
+        ticker.clear_dirty();
+    }
 }
