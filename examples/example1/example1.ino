@@ -3,7 +3,8 @@
 #include <CMMC_Ticker.h>
 
 uint8_t state = 0;
-CMMC_Ticker ticker(&state, 200);
+CMMC_Ticker ticker(200, &state);
+CMMC_Ticker ticker2();
 
 void setup()
 {

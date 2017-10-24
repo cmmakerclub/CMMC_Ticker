@@ -9,14 +9,16 @@ class CMMC_Ticker
 {
     public:
       // constructor
-      CMMC_Ticker(uint8_t *state, uint32_t every_ms) { 
+      CMMC_Ticker(uint32_t every_ms = 1000, uint8_t *state_ptr = NULL) {
         static CMMC_Ticker *that = this;
-        this->_user_state_ptr = state;
+        this->_user_state_ptr = state_ptr;
         this->_every_ms = every_ms;
         this->_ticker = new Ticker;
         this->_ticker_cb = []() {
           that->_dirty_flag = 1; 
-          *that->_user_state_ptr = that->_dirty_flag;
+          if (that->_user_state_ptr != NULL) {
+            *that->_user_state_ptr = that->_dirty_flag; 
+          }
         };
       }
       ~CMMC_Ticker() {} 
