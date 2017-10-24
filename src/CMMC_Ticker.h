@@ -27,7 +27,9 @@ class CMMC_Ticker
       }
       void clear_dirty() {
         _dirty_flag = 0;
-        *_user_state_ptr = _dirty_flag;
+        if (_user_state_ptr != NULL) {
+          *_user_state_ptr = _dirty_flag;
+        }
       }
       void start(); 
     private:
